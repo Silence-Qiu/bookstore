@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
+	  <PackageReference Include="NPOI" Version="2.6.0" />
+	  <PackageReference Include="NSwag.Annotations" Version="13.18.2" />
+	  <PackageReference Include="NSwag.AspNetCore" Version="13.18.2" />
+	  
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore.Data\BookStore.Data.csproj" />
+    <ProjectReference Include="..\BookStore.DTO\BookStore.DTO.csproj" />
+    <ProjectReference Include="..\BookStore.Entities\BookStore.Entities.csproj" />
+    <ProjectReference Include="..\MQuery.AspNetCore\MQuery.AspNetCore.csproj" />
+    <ProjectReference Include="..\MQuery.QueryString\MQuery.QueryString.csproj" />
+    <ProjectReference Include="..\MQuery\MQuery.csproj" />
+    <ProjectReference Include="..\Newtonsoft.Json.StrictContract\Stargazer.Extensions.Newtonsoft.Json.StrictContract.csproj" />
+  </ItemGroup>
+
+</Project>
