@@ -85,7 +85,7 @@ namespace BookStore.Controllers
              [OpenApiIgnore] Query<ClassVM> query,
              [FromQuery(Name = "$search")] string? search = null)
         {
-            var mqy = _db.Books
+            var mqy = _db.Classes
                 .ProjectTo<ClassVM>(_mapper.ConfigurationProvider);
 
             mqy = query.FilterTo(mqy);

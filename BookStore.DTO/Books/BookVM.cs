@@ -16,6 +16,9 @@
         ///<summary> 价格 </summary>
         public decimal Price { get; set; }
 
+        ///<summary> 图片 </summary>
+        public string? Image { get; set; }
+
         ///<summary> 入库时间 </summary>
         public DateTime StorageTime { get; set; }
     }

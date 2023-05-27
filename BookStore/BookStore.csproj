@@ -8,10 +8,12 @@
 
   <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
-	  <PackageReference Include="NPOI" Version="2.6.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
 	  <PackageReference Include="NSwag.Annotations" Version="13.18.2" />
 	  <PackageReference Include="NSwag.AspNetCore" Version="13.18.2" />
-	  
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +24,10 @@
     <ProjectReference Include="..\MQuery.QueryString\MQuery.QueryString.csproj" />
     <ProjectReference Include="..\MQuery\MQuery.csproj" />
     <ProjectReference Include="..\Newtonsoft.Json.StrictContract\Stargazer.Extensions.Newtonsoft.Json.StrictContract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

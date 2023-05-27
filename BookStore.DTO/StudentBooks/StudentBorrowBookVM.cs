@@ -14,12 +14,12 @@ namespace BookStore.DTO.StudentBooks
         ///<summary> 数量 </summary>
         public int Count { get; set; }
 
-        public BookVM Book { get; set; } = default!;
+        public BookVM? Book { get; set; }
 
         ///<summary> 学生id </summary>
         public int StudentId { get; set; }
 
-        public StudentVM Student { get; set; }
+        public StudentVM? Student { get; set; }
 
         ///<summary> 借出时间 </summary>
         public DateTime LendTime { get; set; }

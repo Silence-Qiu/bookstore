@@ -6,7 +6,6 @@ using BookStore.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MQuery;
-using NPOI.XSSF.Streaming;
 using NSwag.Annotations;
 
 namespace BookStore.Controllers
@@ -86,14 +85,14 @@ namespace BookStore.Controllers
              [OpenApiIgnore] Query<StudentBorrowBookVM> query,
              [FromQuery(Name = "$search")] string? search = null)
         {
-            var mqy = _db.Books
+            var mqy = _db.StudentBorrowBooks
                 .ProjectTo<StudentBorrowBookVM>(_mapper.ConfigurationProvider);
 
             mqy = query.FilterTo(mqy);
 
             if (!string.IsNullOrWhiteSpace(search))
             {
-                mqy = mqy.Where(x => x.Book.Name.Contains(search!) || x.Student.Name.Contains(search!));
+                mqy = mqy.Where(x => x.Book!.Name.Contains(search!) || x.Student!.Name.Contains(search!));
             }
 
             mqy = query.FilterTo(mqy);
@@ -107,49 +106,6 @@ namespace BookStore.Controllers
             mqy = query.SliceTo(mqy);
 
             return Ok(await mqy.ToListAsync());
-        }
-        [HttpGet("export")]
-        public async Task<ActionResult> Export(string? search = null)
-        {
-            var query = _db.StudentBorrowBooks
-               .ProjectTo<StudentBorrowBookVM>(_mapper.ConfigurationProvider);
-
-            if (!string.IsNullOrWhiteSpace(search))
-            {
-                query = query.Where(x => x.Student.Name.Contains(search!));
-            }
-
-            var list = await query
-                .OrderByDescending(x => x.Id)
-                .ToListAsync();
-
-            SXSSFWorkbook wb = new();
-
-            var sh = wb.CreateSheet();
-            var row0 = sh.CreateRow(0);
-            row0.CreateCell(0).SetCellValue("学生");
-            row0.CreateCell(1).SetCellValue("书籍");
-            row0.CreateCell(2).SetCellValue("借出时间");
-            row0.CreateCell(3).SetCellValue("归还时间");
-            row0.CreateCell(4).SetCellValue("归还情况");
-
-            for (int rownum = 1; rownum < list.Count; rownum++)
-            {
-                var item = list[rownum];
-                var row = sh.CreateRow(rownum);
-
-                row.CreateCell(0).SetCellValue(item.Student.Name);
-                row.CreateCell(1).SetCellValue(item.Book.Name);
-                row.CreateCell(2).SetCellValue(item.LendTime.ToString());
-                row.CreateCell(3).SetCellValue(item.ReturnTime?.ToString());
-                row.CreateCell(4).SetCellValue(item.Status.ToString());
-            }
-
-            using var ms = new MemoryStream();
-
-            wb.Write(ms, false);
-
-            return File(ms.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
         }
     }
 }

@@ -14,6 +14,7 @@ namespace BookStore.DTO.Students
 
         ///<summary> 班级id </summary>
         public int ClassId { get; set; }
-        public ClassVM Class { get; set; } = new();
+
+        public ClassVM? Class { get; set; } 
     }
 }

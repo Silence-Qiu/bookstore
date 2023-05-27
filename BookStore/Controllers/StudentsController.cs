@@ -32,7 +32,6 @@ namespace BookStore.Controllers
 
             await _db.SaveChangesAsync();
 
-
             return CreatedAtAction(nameof(GetById), new { model.Id }, _mapper.Map<StudentVM>(model));
 
         }
@@ -86,7 +85,7 @@ namespace BookStore.Controllers
              [OpenApiIgnore] Query<StudentVM> query,
              [FromQuery(Name = "$search")] string? search = null)
         {
-            var mqy = _db.Books
+            var mqy = _db.Students
                 .ProjectTo<StudentVM>(_mapper.ConfigurationProvider);
 
             mqy = query.FilterTo(mqy);
